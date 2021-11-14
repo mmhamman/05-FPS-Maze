@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Key/key.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/The Biggest Discovery.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Maze/Maze.gd" type="Script" id=9]
 [ext_resource path="res://MiniMap/MiniMap.gd" type="Script" id=10]
+[ext_resource path="res://Assets/marker.png" type="Texture" id=11]
 
 [sub_resource type="SphereShape" id=6]
 radius = 0.5
@@ -64,7 +65,7 @@ current = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -0.505
+volume_db = -45.287
 autoplay = true
 
 [node name="Key" type="AudioStreamPlayer" parent="."]
@@ -81,8 +82,33 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 39 )
 [node name="Menu" parent="UI" instance=ExtResource( 4 )]
 visible = false
 
-[node name="MiniMap" type="Node2D" parent="UI"]
+[node name="VP" type="Control" parent="UI"]
+margin_right = 200.0
+margin_bottom = 200.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/VP"]
+margin_right = 200.0
+margin_bottom = 200.0
+color = Color( 0, 0, 0, 0.752941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Map_Container" type="Node2D" parent="UI/VP"]
+position = Vector2( 100, 100 )
+
+[node name="MiniMap" type="Node2D" parent="UI/VP/Map_Container"]
+position = Vector2( -100, -100 )
 scale = Vector2( 0.25, 0.25 )
 script = ExtResource( 10 )
+
+[node name="Marker" type="Sprite" parent="UI/VP"]
+position = Vector2( 100, 100 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 11 )
 
 [connection signal="body_entered" from="Maze/Exit" to="Maze/Exit" method="_on_Exit_body_entered"]

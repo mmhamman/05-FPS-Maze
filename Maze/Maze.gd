@@ -12,7 +12,7 @@ var cell_walls = {
 	Vector2(-1, 0): W
 }
 
-onready var MiniMap = get_node("/root/Game/UI/MiniMap")
+onready var MiniMap = get_node("/root/Game/UI/VP/Map_Container/MiniMap")
 
 var map = []
 var mini_map = []
@@ -108,4 +108,4 @@ func make_maze():
 			var tile2 = mini_tiles[map[x][z]].instance()
 			tile2.position = Vector2(x*mini_tile,z*mini_tile)
 			tile2.name = "MTile_" + str(x) + "_" + str(z)
-			add_child(tile2)
+			MiniMap.add_child(tile2)
